@@ -1,3 +1,4 @@
 *.cache
 *.sublime_session
 *.last-run
+*.pyc
