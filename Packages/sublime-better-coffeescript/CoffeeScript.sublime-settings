@@ -1,0 +1,29 @@
+{
+	/*
+		The directory containing your coffee binary. Usually
+		/usr/local/bin.
+	*/
+	"binDir": "/usr/local/bin"
+
+	/*
+		Compile without the top-level function wrapper (coffee -b).
+	*/
+
+,	"noWrapper": true
+
+	/*
+		Enable or disable refresh the compiled Output on Save.
+		Only available for watch mode.
+	*/
+,	"watchOnSave": true
+	/*
+		Enable refreshing compiled JS when CoffeeScript is modified.
+
+		Put false to disable
+		Put a number of seconds to delay the refresh
+	*/
+,	"watchOnModified": 0.5
+
+
+
+}
