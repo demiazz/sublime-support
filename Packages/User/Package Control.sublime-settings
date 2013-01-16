@@ -38,5 +38,10 @@
 		"sublime-better-coffeescript",
 		"SublimErl",
 		"Theme - Nil"
+	],
+	"repositories":
+	[
+		"https://github.com/sbecker/github_textmate_theme.git",
+		"https://github.com/sbecker/github_textmate_theme"
 	]
 }
