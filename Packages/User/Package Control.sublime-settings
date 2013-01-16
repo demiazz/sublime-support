@@ -3,6 +3,7 @@
 	[
 		"Backbone.js",
 		"BeautifyRuby",
+		"Capybara Snippets",
 		"Rails Migrations List"
 	]
 }
