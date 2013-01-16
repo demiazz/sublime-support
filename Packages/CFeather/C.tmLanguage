@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>C</string>
+
+    <key>scopeName</key>
+    <string>source.c</string>
+
+    <key>fileTypes</key>
+    <array>
+        <string>c</string>
+        <string>h</string>
+    </array>
+
+    <key>author</key>
+    <string>https://github.com/frou</string>
+
+    <key>uuid</key>
+    <string>5C89418E-D063-4595-82F7-9D026EEA6296</string>
+
+    <key>repository</key>
+    <dict>
+        <key>comment-block</key>
+        <dict>
+            <key>name</key>
+            <string>comment.block.c</string>
+
+            <key>begin</key>
+            <string>/\*</string>
+
+            <key>end</key>
+            <string>\*/</string>
+        </dict>
+
+        <key>comment-doxygen-block</key>
+        <dict>
+            <key>name</key>
+            <string>comment.doxygen.block.c</string>
+
+            <key>begin</key>
+            <string>/\*[\*!]</string>
+
+            <key>end</key>
+            <string>\*/</string>
+
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#doxygen-command</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>comment-line-double-slash</key>
+        <dict>
+            <key>name</key>
+            <string>comment.line.double-slash.c</string>
+
+            <key>begin</key>
+            <string>//</string>
+
+            <key>end</key>
+            <string>$</string>
+        </dict>
+
+        <key>comment-doxygen-line-double-slash</key>
+        <dict>
+            <key>name</key>
+            <string>comment.doxygen.line.double-slash.c</string>
+
+            <key>begin</key>
+            <string>//[/!]</string>
+
+            <key>end</key>
+            <string>$</string>
+
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#doxygen-command</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>doxygen-command</key>
+        <dict>
+            <key>name</key>
+            <string>comment.doxygen.command.c</string>
+
+            <key>match</key>
+            <string>[\\@]\S*</string>
+        </dict>
+    </dict>
+
+    <key>patterns</key>
+    <array>
+        <!-- Comment -->
+        <dict>
+            <key>include</key>
+            <string>#comment-doxygen-block</string>
+        </dict>
+
+        <dict>
+            <key>include</key>
+            <string>#comment-block</string>
+        </dict>
+
+        <dict>
+            <key>include</key>
+            <string>#comment-doxygen-line-double-slash</string>
+        </dict>
+
+        <dict>
+            <key>include</key>
+            <string>#comment-line-double-slash</string>
+        </dict>
+
+        <!-- String -->
+        <dict>
+            <key>name</key>
+            <string>string.quoted.double.c</string>
+
+            <key>match</key>
+            <string>(\bL)?"([^\\]|\\([\\"'nrbtfav\?]|[0-7]{1,3}|x[0-9A-Fa-f]{1,2}))*?"</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>string.other.preprocessor.c</string>
+
+            <key>begin</key>
+            <string>^\s*#</string>
+
+            <key>end</key>
+            <string>([^\\]|(?&lt;=\*/))\n</string>
+
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comment-doxygen-block</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#comment-block</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#comment-doxygen-line-double-slash</string>
+                </dict>
+
+                <dict>
+                    <key>include</key>
+                    <string>#comment-line-double-slash</string>
+                </dict>
+            </array>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>string.other.label.c</string>
+
+            <key>match</key>
+            <string>^\s*(?!(case|default):)[A-Za-z_][A-Za-z_0-9]*:</string>
+        </dict>
+
+        <!-- Storage -->
+        <dict>
+            <key>name</key>
+            <string>storage.modifier.c</string>
+
+            <key>match</key>
+            <string>\b(auto|const|extern|register|static|volatile)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>storage.type.c</string>
+
+            <key>match</key>
+            <string>\b(char|double|float|int|long|short|signed|unsigned|void)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>storage.type.tag.c</string>
+
+            <key>match</key>
+            <string>\b((enum|struct|union)\s+[A-Za-z_][A-Za-z_0-9]*)\b(?!\s*\{)</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>storage.type.typedef.c</string>
+
+            <key>match</key>
+            <string>\b(([A-Za-z_][A-Za-z_0-9]*_t)|i8|u8|i16|u16|i32|u32|i64|u64|f32|f64|byte|bool)\b</string>
+        </dict>
+
+        <!-- Constant -->
+        <dict>
+            <key>name</key>
+            <string>constant.numeric.floating-point.c</string>
+
+            <key>match</key>
+            <string>(\b[0-9]+\.[0-9]*|\.[0-9]+)([eE][+-]?[0-9]+)?[fFlL]?\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.numeric.floating-point.c</string>
+
+            <key>match</key>
+            <string>\b[0-9]+[eE][+-]?[0-9]+[fFlL]?\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.numeric.integer.c</string>
+
+            <key>match</key>
+            <string>\b(0[xX][0-9A-Fa-f]+|0[0-7]*|[1-9][0-9]*)([uU][lL]?|[lL][uU]?)?\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.character.c</string>
+
+            <key>match</key>
+            <string>'([^\\]|\\([\\"'nrbtfav\?]|[0-7]{1,3}|x[0-9A-Fa-f]{1,2}))??'</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.other.c</string>
+
+            <key>match</key>
+            <string>\b([A-Z_][A-Z_0-9]*)\b</string>
+        </dict>
+
+        <!-- Keyword -->
+        <dict>
+            <key>name</key>
+            <string>keyword.c</string>
+
+            <key>match</key>
+            <string>\b(break|case|continue|default|do|else|enum|for|goto|if|return|sizeof|struct|switch|typedef|union|while)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>keyword.operator.compound.assignment.c</string>
+
+            <key>match</key>
+            <string>(\+=|-=|\*=|/=|%=|&lt;&lt;=|>>=|&amp;=|\^=|\|=)</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>keyword.operator.compound.other.c</string>
+
+            <key>match</key>
+            <string>(->|\+\+|--|&lt;&lt;|>>|&lt;=|>=|==|!=|&amp;&amp;|\|\|)</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>keyword.operator.simple.c</string>
+
+            <key>match</key>
+            <string>(!|%|\^|&amp;|\*|-|\+|=|~|\||\.|&lt;|>|/|\?)</string>
+        </dict>
+
+        <!-- Entity -->
+        <dict>
+            <key>name</key>
+            <string>entity.name.function.c</string>
+
+            <key>match</key>
+            <string>(?&lt;!\sreturn.)(?&lt;=[A-Za-z_0-9]\s)\b([A-Za-z_][A-Za-z_0-9]*)\b(?=\s*\()</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.name.function.c</string>
+
+            <key>match</key>
+            <string>(?&lt;!\sreturn..)(?&lt;=[A-Za-z_0-9](\s\*|\*\s))\b([A-Za-z_][A-Za-z_0-9]*)\b(?=\s*\()</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.name.function.c</string>
+
+            <key>match</key>
+            <string>(?&lt;=^)\b([A-Za-z_][A-Za-z_0-9]*)\b(?=\s*\()</string>
+        </dict>
+
+        <!-- Support -->
+        <dict>
+            <key>name</key>
+            <string>support.function.c</string>
+
+            <key>match</key>
+            <string>\b([A-Za-z_][A-Za-z_0-9]*)\b(?=\s*\()</string>
+        </dict>
+    </array>
+</dict>
+</plist>

@@ -1,0 +1,10 @@
+<snippet>
+    <content><![CDATA[
+${1:void} ${2}(${3:void})
+{
+    ${4}
+}
+]]></content>
+    <tabTrigger>func</tabTrigger>
+    <scope>source.c</scope>
+</snippet>

@@ -1,0 +1,7 @@
+<snippet>
+    <content><![CDATA[
+fprintf(stderr, "${1}\n"${2});
+]]></content>
+    <tabTrigger>err</tabTrigger>
+    <scope>source.c</scope>
+</snippet>
