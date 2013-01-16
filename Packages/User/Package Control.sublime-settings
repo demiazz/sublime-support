@@ -9,6 +9,7 @@
 		"CoffeeLint",
 		"CoffeeScript",
 		"CSScomb",
+		"CSSLint",
 		"Rails Migrations List"
 	]
 }
