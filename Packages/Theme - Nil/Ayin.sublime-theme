@@ -652,12 +652,12 @@
 	},
 	{
 		"class": "quick_panel_path_label",
-		"fg": [60, 44, 80],
+		"fg": [92, 92, 92],
 		"match_fg": [100, 40, 180],
 		"bg": [240, 240, 240],
 		"selected_fg": [100, 40, 140],
 		"selected_match_fg": [100, 40, 180],
-		"selected_bg": [240, 240, 240]
+		"selected_bg": [219, 173, 244]
 	},
 	{
 		"class": "quick_panel_score_label",
