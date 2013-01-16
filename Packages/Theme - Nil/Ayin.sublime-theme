@@ -86,9 +86,9 @@
 	//	- Inactive tab label
 	{
 		"class": "tab_label",
-		"fg": [80, 70, 90],
+		"fg": [20, 10, 30],
 		"shadow_color": [255, 255, 255, 160],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 
 	//	- Active tab label
@@ -96,8 +96,8 @@
 		"class": "tab_label",
 		"parents": [{"class": "tab_control", "attributes": ["selected"]}],
 		"shadow_color": [255, 255, 255, 255],
-		"shadow_offset": [0, 1],
-		"fg": [73, 64, 85, 255]
+		"shadow_offset": [0, 0],
+		"fg": [13, 4, 25, 255]
 	},
 
 	// - Dirty inactive tab label
@@ -329,22 +329,22 @@
 	// 	- General labels
 	{
 		"class": "label_control",
-		"color": [70, 70, 70]
+		"color": [10, 10, 10]
 	},
 	//	- Text field labels
 	{
 		"class": "label_control",
 		"parents": [{"class": "panel_control"}],
 		"shadow_color": [255, 255, 255, 160],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 	//	- Button labels
 	{
 		"class": "label_control",
 		"parents": [{"class": "button_control"}],
-		"color": [70, 70, 70],
+		"color": [10, 10, 10],
 		"shadow_color": [255, 255, 255, 160],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 
 
@@ -363,8 +363,8 @@
 	//	- Tooltip content
 	{
 		"class": "tool_tip_label_control",
-		"color": [73, 64, 85],
-		"shadow_offset": [0, 1],
+		"color": [13, 4, 25],
+		"shadow_offset": [0, 0],
 		"shadow_color": [255, 255, 255, 160]
 	},
 
@@ -390,9 +390,9 @@
 		"class": "label_control",
 		"parents": [{"class": "status_bar"}],
 		"font.size": 10,
-		"color": [73, 64, 85],
+		"color": [13, 4, 25],
 		"shadow_color": [255, 255, 255, 160],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 
 
@@ -437,41 +437,41 @@
 	//	- Sidebar heading
 	{
 		"class": "sidebar_heading",
-		"color": [100, 100, 100],
+		"color": [60, 60, 60],
 		"font.bold": true,
 		"shadow_color": [255, 255, 255, 160],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 	{
 		"class": "sidebar_heading",
 		"parents": [{"class": "tree_row", "attributes": ["selected"]}],
-		"color": [80, 80, 80]
+		"color": [20, 20, 20]
 	},
 	//	- Sidebar entry label
 	{
 		"class": "sidebar_label",
-		"color": [73, 64, 85],
+		"color": [13, 4, 25],
 		"shadow_color": [255, 255, 255],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 	{
 		"class": "sidebar_label",
 		"parents": [{"class": "tree_row", "attributes": ["expandable"]}],
-		"color": [100, 40, 140]
+		"color": [60, 0, 80]
 	},
 	{
 		"class": "sidebar_label",
 		"parents": [{"class": "tree_row", "attributes": ["expandable"]}],
 		"settings": ["bold_folder_labels"],
 		"font.bold": true,
-		"color": [90, 64, 130]	// text is bold, so make the color a bit sublter
+		"color": [30, 4, 70]	// text is bold, so make the color a bit sublter
 	},
 	{	//	Sidebar selected entry label
 		"class": "sidebar_label",
 		"parents": [{"class": "tree_row", "attributes": ["selected"]}],
-		"color": [90, 64, 100],
+		"color": [30, 4, 60],
 		"shadow_color": [255, 255, 255, 160],
-		"shadow_offset": [0, 1]
+		"shadow_offset": [0, 0]
 	},
 
 	//	- Sidebar open files close/dirty
