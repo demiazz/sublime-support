@@ -2,10 +2,11 @@
 	"caret_style": "phase",
 	"color_scheme": "Packages/Color Scheme - Default/GitHub.tmTheme",
 	"default_line_ending": "unix",
-	"ensure_newline_at_eof_on_save": false,
+	"dictionary": "Packages/Dictionaries/Russian_ru_RU.dic",
+	"ensure_newline_at_eof_on_save": true,
 	"font_face": "PT Mono",
-	"font_options": "no_round",
 	"font_size": 14,
+	"font_options": ["subpixel_antialias", "no_round"],
 	"highlight_line": true,
 	"highlight_modified_tabs": false,
 	"ignored_packages":
@@ -22,5 +23,5 @@
 	"tab_size": 2,
 	"theme": "Ayin.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": false
+	"trim_trailing_white_space_on_save": true
 }
