@@ -6,6 +6,8 @@
 	<array>
 		<string>yaml</string>
 		<string>yml</string>
+		<string>yaml.example</string>
+		<string>yml.example</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>^[^#]\s*.*:(\s*\[?| &amp;.+)?$</string>
