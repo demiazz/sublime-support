@@ -16,6 +16,7 @@ AC_OPTS = sublime.INHIBIT_WORD_COMPLETIONS | sublime.INHIBIT_EXPLICIT_COMPLETION
 SPLIT_FN_POS_PAT = re.compile(r'(.+?)(?:[:](\d+))?(?:[:](\d+))?$')
 URL_SCHEME_PAT = re.compile(r'^[\w.+-]+://')
 URL_PATH_PAT = re.compile(r'^(?:[\w.+-]+://|(?:www|(?:\w+\.)*(?:golang|pkgdoc|gosublime)\.org))')
+HIST_EXPAND_PAT = re.compile(r'^(\^+)\s*(\d+)$')
 
 HOURGLASS = u'\u231B'
 
@@ -44,7 +45,7 @@ DEFAULT_COMMANDS = [
 	'go vet',
 	'go help',
 ]
-DEFAULT_CL = [(s, s) for s in DEFAULT_COMMANDS]
+DEFAULT_CL = [(s, s+' ') for s in DEFAULT_COMMANDS]
 
 if not gs.checked(DOMAIN, '_vars'):
 	stash = {}
@@ -63,9 +64,27 @@ class EV(sublime_plugin.EventListener):
 		pos = gs.sel(view).begin()
 		if view.score_selector(pos, 'text.9o') == 0:
 			return []
+
 		cl = []
+
+		hkey = '9o.hist.%s' % view.settings().get('9o.wd', '')
+		for i, cmd in enumerate(reversed(gs.dval(gs.aso().get(hkey), []))):
+			if not cmd in cl:
+				cl.append(('^%d %s' % (i+1, cmd), cmd+' '))
+
 		cl.extend(DEFAULT_CL)
+
 		return (cl, AC_OPTS)
+
+class Gs9oBuildPromptCommand(sublime_plugin.WindowCommand):
+	def is_enabled(self):
+		view = gs.active_valid_go_view(self.window)
+		return view is not None
+
+	def run(self):
+		view = self.window.active_view()
+		args = {'run': '^1'} if gs.is_pkg_view(view) else {}
+		view.run_command('gs9o_open', args)
 
 class Gs9oInsertLineCommand(sublime_plugin.TextCommand):
 	def run(self, edit, after=True):
@@ -119,6 +138,7 @@ class Gs9oInitCommand(sublime_plugin.TextCommand):
 		vs.set("highlight_line", True)
 		vs.set("draw_indent_guides", True)
 		vs.set("indent_guide_options", ["draw_normal", "draw_active"])
+		vs.set("word_separators", "./\\()\"'-:,.;<>~!@#$%&*|+=[]{}`~?")
 		v.set_syntax_file('Packages/GoSublime/9o.tmLanguage')
 
 		if was_empty:
@@ -211,22 +231,32 @@ class Gs9oExecCommand(sublime_plugin.TextCommand):
 			cmd = ln[1].strip()
 			if cmd:
 				vs = view.settings()
-				lc_key = '%s.last_command' % DOMAIN
-				if cmd.startswith('#'):
-					rep = vs.get(lc_key, '')
-					if rep:
-						view.replace(edit, line, ('%s# %s %s' % (ln[0], rep, cmd.lstrip('# \t'))))
-					return
-				elif cmd == '!!':
-					cmd = vs.get(lc_key, '')
+				aso = gs.aso()
+				hkey = '9o.hist.%s' % wd
+				hist = gs.dval(aso.get(hkey), [])
+
+				m = HIST_EXPAND_PAT.match(cmd)
+				if m:
+					pfx = m.group(1)
+					idx = int(m.group(2))-1
+					cmd = hist[-idx] if idx < len(hist) else ''
+					if pfx == '^' or not cmd:
+						view.replace(edit, line, ('%s# %s' % (ln[0], cmd)))
+						return
 				else:
-					vs.set(lc_key, cmd)
+					try:
+						hist.remove(cmd)
+					except ValueError:
+						pass
+					hist.append(cmd)
+					aso.set(hkey, hist)
+					gs.save_aso()
 
 			if not cmd:
 				view.run_command('gs9o_init')
 				return
 
-			view.replace(edit, line, (u'[ %s %s ]' % (cmd, HOURGLASS)))
+			view.replace(edit, line, (u'[ `%s` %s ]' % (cmd, HOURGLASS)))
 			rkey = '9o.exec.%s' % uuid.uuid4()
 			view.add_regions(rkey, [sublime.Region(line.begin(), view.size())], '')
 			view.run_command('gs9o_init')
